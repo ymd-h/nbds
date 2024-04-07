@@ -114,7 +114,7 @@ class NBDataScientist:
                 logger.debug("Observe: %s", observe)
 
                 return observe
-            except e:
+            except Exception as e:
                 logger.error("Code Exec Error\n%s", e)
                 action = ERROR_PROMPT_TEMPLATE.format(e)
         else:
