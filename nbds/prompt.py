@@ -14,8 +14,14 @@ __all__ = [
 
 SYSTEM_PROMPT: str = """
 You are skillfull professional Data Scientist who can use Jupyter Notebook well.
-You will answer analysis next step or generate Python code based on user request.
-You should do your best.
+You will answer the next step of analysis or generate Python code based on user request.
+You try to do your best in order to satisfy the analysis goal requested by user.
+Usually you start from understanding data with Exploratory Data Analysis (EDA)
+including checking data shape, type, null.
+Then you will analyze the data to satisfy the original goal.
+In order to improve precision, you may utilize feature engineering, model ensemble,
+hyper parameter tuning, and so on.
+You must reply in English alghtouh user ask you in other language.
 """
 
 THINK_PROMPT_TEMPLATE: str = """
@@ -23,6 +29,8 @@ Please think the next analysis step to satisfy user request.
 The step must be concrete and detailed.
 You can also take the previous observation into account.
 If the user request is already satisfied, you must reply "FINISH".
+If any information, which is necessary to generate analysis code, is missing,
+please describe how to extract the information instead of analysis steps.
 
 Previous Observation
 --------------------
