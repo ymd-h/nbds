@@ -41,6 +41,12 @@ class Gemini(Model):
         self.m._async_client = cm.get_default_client("generative_async")
 
         self.c = self.m.start_chat()
+        response = self.c.send_message(f"""{SYSTEM_PROMPT}
+
+Please reply 'OK', when you confirmed.""")
+
+        if "OK" not in response.text:
+            logger.warning("Initial Response:\n%s\n", response.text)
 
     def __call__(self, prompt: str) -> str:
         """
@@ -56,15 +62,7 @@ class Gemini(Model):
         str
             Model Response
         """
-        response = self.c.send_message(f"""
-==== Start: System Prompt ====
-{SYSTEM_PROMPT}
-==== Finish: System Prompt ====
-
-==== Start: User Prompt ====
-{prompt}
-==== Finish: User Prompt ====
-""")
+        response = self.c.send_message(prompt)
         logger.debug("Gemini: %d candidates", len(response.candidates))
 
         return response.text
