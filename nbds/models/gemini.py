@@ -32,7 +32,7 @@ class Gemini(Model):
 
         # Encapsule client configuration
         cm = _ClientManager()
-        cm.configure(api_key)
+        cm.configure(api_key=api_key)
 
         self.m: genai.GenerativeModel = genai.GenerativeModel(model)
         logger.info("Gemini: %s", self.m.model_name)
