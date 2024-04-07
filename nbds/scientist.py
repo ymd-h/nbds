@@ -4,10 +4,11 @@ Data Scientist (:mod:`nbds.scientist`)
 """
 from __future__ import annotations
 import re
+from logging import getLogger
 
 from typing_extensions import Any, Dict, Optional
 from IPython.core.magic import register_cell_magic
-from logging import getLogger
+from IPython.display import display, Markdown
 
 from nbds.prompt import (
     THINK_PROMPT_TEMPLATE,
@@ -106,12 +107,12 @@ class NBDataScientist:
             if code is None:
                 raise ValueError("Model Response doesn't contain Python Code")
 
-            print(code[0])
+            display(Markdown(code[0]))
             if input("Can I execute this code? (yes/no)") not in ["ok", "yes", "y"]:
                 raise ValueError("Code is not allowed")
 
             try:
-                exec(code[0], self.variables)
+                exec(code[1], self.variables)
                 logger.debug("Global Variables: %s", list(self.variables))
 
                 observe: str = self.variables.get("observe", None)
