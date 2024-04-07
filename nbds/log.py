@@ -6,6 +6,7 @@ from __future__ import annotations
 from logging import Handler
 
 from typing_extensions import List, Optional, Union
+from logging import getLogger
 import wblog
 
 __all__ = [
@@ -13,7 +14,7 @@ __all__ = [
     "disable_logging",
 ]
 
-logger = wblog.getLogger()
+logger = getLogger(__name__)
 
 
 def enable_logging(level: Optional[int] = None, *,

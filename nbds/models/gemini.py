@@ -7,13 +7,13 @@ from __future__ import annotations
 from typing_extensions import Optional
 import google.generativeai as genai
 from google.generativeai.client import _ClientManager
-import wblog
+from logging import getLogger
 
 from nbds.models import Model
 
 __all__ = ["Gemini"]
 
-logger = wblog.getLogger()
+logger = getLogger(__name__)
 
 
 class Gemini(Model):
