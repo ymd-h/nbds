@@ -107,7 +107,7 @@ class NBDataScientist:
                 raise ValueError("Model Response doesn't contain Python Code")
 
             try:
-                exec(code[0], globals = self.variables)
+                exec(code[0], self.variables)
                 logger.debug("Global Variables: %s", list(self.variables))
 
                 observe: str = self.variables.get("observe", None)
