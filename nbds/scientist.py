@@ -7,6 +7,7 @@ import re
 
 from typing_extensions import Any, Dict, Optional
 from IPython.core.magic import register_cell_magic
+import wblog
 
 from nbds.prompt import THINK_PROMPT_TEMPLATE, ERROR_PROMPT_TEMPLATE
 from nbds.models import Model
@@ -17,6 +18,8 @@ __all__ = ["NBDataScientist"]
 CODE: re.Pattern = re.compile(r"""```python
 (.*)
 ```""", re.DOTALL)
+
+logger = wblog.getLogger()
 
 
 class NBDataScientist:
