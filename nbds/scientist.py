@@ -106,6 +106,10 @@ class NBDataScientist:
             if code is None:
                 raise ValueError("Model Response doesn't contain Python Code")
 
+            print(code[0])
+            if input("Can I execute this code? (yes/no)") not in ["ok", "yes", "y"]:
+                raise ValueError("Code is not allowed")
+
             try:
                 exec(code[0], self.variables)
                 logger.debug("Global Variables: %s", list(self.variables))
