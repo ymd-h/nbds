@@ -13,6 +13,8 @@ __all__ = [
     "disable_logging",
 ]
 
+logger = wblog.getLogger()
+
 
 def enable_logging(level: Optional[int] = None, *,
                    handlers: Optional[Union[Handler, List[Handler]]] = None,
@@ -21,10 +23,12 @@ def enable_logging(level: Optional[int] = None, *,
     Enable Logging
     """
     wblog.start_logging("nbds", level, handlers = handlers, propagate = propagate)
+    logger.info("Enable Logging")
 
 
 def disable_logging():
     """
     Disable Logging
     """
+    logger.info("Disable Logging")
     wblog.stop_logging("nbds")
