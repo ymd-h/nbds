@@ -37,6 +37,7 @@ EXEC_PROMPT_TEMPLATE: str = """
 Please generate Python code for the following analysis step.
 Your generated code must be a complete code block
 which includes import statements, class definitions, and so on.
+But the code **MUST NOT** upload any data, nor break any existing data at all.
 The code block must be enclosed by ```python markdown code fence.
 The key result ot the analysis must be stored local variable `observe` in the code.
 The result must be converted to human readable string beforehand.
