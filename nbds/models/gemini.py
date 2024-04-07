@@ -56,7 +56,7 @@ class Gemini(Model):
         str
             Model Response
         """
-        response = self.c.send_message()
+        response = self.c.send_message(prompt)
         logger.debug("Gemini: %d candidates", len(response.candidates))
 
         return response.text
