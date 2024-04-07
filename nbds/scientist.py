@@ -6,6 +6,7 @@ from __future__ import annotations
 import re
 
 from typing_extensions import Any, Dict, Optional
+from IPython.core.magic import register_cell_magic
 
 from nbds.prompt import THINK_PROMPT_TEMPLATE, ERROR_PROMPT_TEMPLATE
 from nbds.models import Model
@@ -111,3 +112,12 @@ class NBDataScientist:
                 action = ERROR_PROMPT_TEMPLATE.format(e)
         else:
             raise ValueError(f"Maximum Retry Error: {self.max_retry}")
+
+
+    def register_magic(self) -> None:
+        """
+        Register Jupyter Cell Magic `%%nbds`
+        """
+        @register_cell_magic
+        def nbds(line: str, cell: str):
+            return self.analyze(cell)
