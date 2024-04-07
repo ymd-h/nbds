@@ -10,6 +10,7 @@ from google.generativeai.client import _ClientManager
 from logging import getLogger
 
 from nbds.models import Model
+from nbds.prompt import SYSTEM_PROMPT
 
 __all__ = ["Gemini"]
 
@@ -56,7 +57,15 @@ class Gemini(Model):
         str
             Model Response
         """
-        response = self.c.send_message(prompt)
+        response = self.c.send_message(f"""
+        ==== Start: System Prompt ====
+        {SYSTEM_PROMPT}
+        ==== Finish: System Prompt ====
+
+        ==== Start: User Prompt ====
+        {prompt}
+        ==== Finish: User Prompt ====
+        """)
         logger.debug("Gemini: %d candidates", len(response.candidates))
 
         return response.text
