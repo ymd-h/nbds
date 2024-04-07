@@ -18,17 +18,16 @@ logger = getLogger(__name__)
 
 
 class Gemini(Model):
-    def __init__(self, model: str = "gemini-1.0-pro", api_key: Optional[str] = None):
+    def __init__(self, api_key: str, model: str = "gemini-1.0-pro"):
         """
         Gemini Model
 
         Parameters
         ----------
+        api_key : str
+            API Key.
         model : str, optional
             Model Name. Default is "gemini-pro-1.0"
-        api_key : str, optional
-            API Key. If ``None`` (default),
-            an environmental value ``GOOGLE_API_KEY`` is used
         """
 
         # Encapsule client configuration
