@@ -55,6 +55,7 @@ class NBDataScientist:
         observe: Optional[str] = None
         while True:
             action: Optional[str] = self.think(prompt, observe)
+            logger.info("Think\n%s", action)
             if action is None:
                 return
 
