@@ -17,7 +17,7 @@ logger = wblog.getLogger()
 
 
 class Gemini(Model):
-    def __init__(self, model: str = "gemini-pro-1.0", api_key: Optional[str] = None):
+    def __init__(self, model: str = "gemini-1.0-pro", api_key: Optional[str] = None):
         """
         Gemini Model
 
