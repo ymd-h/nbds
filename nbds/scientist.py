@@ -55,7 +55,7 @@ class NBDataScientist:
         observe: Optional[str] = None
         while True:
             action: Optional[str] = self.think(prompt, observe)
-            logger.info("Think\n%s", action)
+            logger.info("Think\n%s\n", action)
             if action is None:
                 return
 
@@ -78,7 +78,7 @@ class NBDataScientist:
             Next action prompt
         """
         response: str = self.model(THINK_PROMPT_TEMPLATE.format(prompt, observe))
-        logger.debug("Model Response\n%s", response)
+        logger.debug("Model Response\n%s\n", response)
 
         if "FINISH" in response:
             return None
@@ -102,14 +102,14 @@ class NBDataScientist:
         """
         for i in range(self.max_retry):
             response: str = self.model(EXEC_PROMPT_TEMPLATE.format(action))
-            logger.debug("Model Response\n%s", response)
+            logger.debug("Model Response\n%s\n", response)
 
             code: Optional[re.Match] = CODE.search(response)
             if code is None:
                 raise ValueError("Model Response doesn't contain Python Code")
 
             display(Markdown(code[0]))
-            if input("Can I execute this code? (yes/no)") not in ["ok", "yes", "y"]:
+            if input("Can I execute this code? (yes/no)\n") not in ["ok", "yes", "y"]:
                 raise ValueError("Code is not allowed")
 
             try:
@@ -121,7 +121,7 @@ class NBDataScientist:
 
                 return observe
             except Exception as e:
-                logger.error("Code Exec Error\n%s", e)
+                logger.error("Code Exec Error\n%s\n", e)
                 action = ERROR_PROMPT_TEMPLATE.format(e)
         else:
             raise ValueError(f"Maximum Retry Error: {self.max_retry}")
