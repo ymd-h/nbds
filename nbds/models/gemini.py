@@ -58,14 +58,14 @@ class Gemini(Model):
             Model Response
         """
         response = self.c.send_message(f"""
-        ==== Start: System Prompt ====
-        {SYSTEM_PROMPT}
-        ==== Finish: System Prompt ====
+==== Start: System Prompt ====
+{SYSTEM_PROMPT}
+==== Finish: System Prompt ====
 
-        ==== Start: User Prompt ====
-        {prompt}
-        ==== Finish: User Prompt ====
-        """)
+==== Start: User Prompt ====
+{prompt}
+==== Finish: User Prompt ====
+""")
         logger.debug("Gemini: %d candidates", len(response.candidates))
 
         return response.text
