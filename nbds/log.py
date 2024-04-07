@@ -20,7 +20,7 @@ def enable_logging(level: Optional[int] = None, *,
     """
     Enable Logging
     """
-    wblog.start_logging("nbds", lebel, handlers = handlers, propagate = propagate)
+    wblog.start_logging("nbds", level, handlers = handlers, propagate = propagate)
 
 
 def disable_logging():
