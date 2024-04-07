@@ -43,7 +43,7 @@ class NBDataScientist:
         self.max_retry: int = max_retry
         self.variables: Dict[str, Any] = {}
 
-    def analyze(self, prompt: str) -> None:
+    def analyze(self, prompt: str) -> Optional[str]:
         """
         Analyze
 
@@ -51,13 +51,18 @@ class NBDataScientist:
         ----------
         prompt : str
             User Request Prompt
+
+        Returns
+        -------
+        str, optional
+            Final Observation
         """
         observe: Optional[str] = None
         while True:
             action: Optional[str] = self.think(prompt, observe)
             logger.info("Think\n%s\n", action)
             if action is None:
-                return
+                return observe
 
             observe = self.exec(action)
 
@@ -117,7 +122,7 @@ class NBDataScientist:
                 logger.debug("Global Variables: %s", list(self.variables))
 
                 observe: str = self.variables.get("observe", None)
-                logger.debug("Observe: %s", observe)
+                logger.info("Observe: %s", observe)
 
                 return observe
             except Exception as e:
@@ -132,5 +137,5 @@ class NBDataScientist:
         Register Jupyter Cell Magic `%%nbds`
         """
         @register_cell_magic
-        def nbds(line: str, cell: str):
+        def nbds(line: str, cell: str) -> Optional[str]:
             return self.analyze(cell)
