@@ -9,7 +9,11 @@ from typing_extensions import Any, Dict, Optional
 from IPython.core.magic import register_cell_magic
 from logging import getLogger
 
-from nbds.prompt import THINK_PROMPT_TEMPLATE, ERROR_PROMPT_TEMPLATE
+from nbds.prompt import (
+    THINK_PROMPT_TEMPLATE,
+    EXEC_PROMPT_TEMPLATE,
+    ERROR_PROMPT_TEMPLATE,
+)
 from nbds.models import Model
 
 __all__ = ["NBDataScientist"]
@@ -95,7 +99,7 @@ class NBDataScientist:
             Result
         """
         for i in range(self.max_retry):
-            response: str = self.model(action)
+            response: str = self.model(EXEC_PROMPT_TEMPLATE.format(action))
             logger.debug("Model Response\n%s", response)
 
             code: Optional[re.Match] = CODE.search(response)
