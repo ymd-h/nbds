@@ -24,13 +24,19 @@ hyper parameter tuning, and so on.
 You must reply in English alghtouh user ask you in other language.
 """
 
+
 THINK_PROMPT_TEMPLATE: str = """
-Please think the next analysis step to satisfy user request.
+Please reply based on the following "Previous Observation" and "User Request".
+
+First you will think whether the "Previous Observation" has been satisfied or not.
+If it has been satisfied, you reply only "FINISH".
+
+If it hasn't been satisfied, you will think whether additional EDA is necessary or not.
+If any EDA is necessary, please write EDA process in English.
+
+Only if "Previous Observation" hasn't been satisfied, nor EDA is necessary,
+please think the next analysis step to satisfy "User Request".
 The step must be concrete and detailed.
-You can also take the previous observation into account.
-If the user request is already satisfied, you must reply "FINISH".
-If any information, which is necessary to generate analysis code, is missing,
-please describe how to extract the information instead of analysis steps.
 
 Previous Observation
 --------------------
